@@ -29,6 +29,7 @@
             name = "nisaldon";
             home = "/Users/nisaldon";
           };
+          home.stateVersion = "24.05";
           home-manager.users.nisaldon = import ./home.nix;
 # Optionally, use home-manager.extraSpecialArgs to pass
 # arguments to home.nix
