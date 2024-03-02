@@ -11,7 +11,12 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
-    plugins = [];
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "Aloxaf/fzf-tab"; } # Simple plugin installation
+      ];
+    };
   };
 
   programs.starship = {
