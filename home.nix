@@ -1,10 +1,21 @@
 { pkgs, ... }: {
-  programs.zsh.enable = true;
   home.stateVersion = "24.05";
+
   home.packages = with pkgs; [
-    hello
+    fd
+    starship
   ];
 
-  # The state version is required and should stay at the version you
-  # originally installed.
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
+    plugins = [];
+  };
+
+  programs.starship = {
+    enable = true;
+  };
+
 }
