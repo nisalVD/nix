@@ -22,18 +22,16 @@
       modules = [ 
         configuration
         ./configuration.nix 
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          users.users.nisaldon = {
-            name = "nisaldon";
-            home = "/Users/nisaldon";
-          };
-          home.stateVersion = "24.05";
-          home-manager.users.nisaldon = import ./home.nix;
-# Optionally, use home-manager.extraSpecialArgs to pass
-# arguments to home.nix
-        }
+          home-manager.darwinModules.home-manager 
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            users.users.nisaldon = {
+              name = "nisaldon";
+              home = "/Users/nisaldon";
+            };
+            home-manager.users.nisaldon = import ./home.nix;
+          }
       ];
     };
 
