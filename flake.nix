@@ -13,15 +13,16 @@
   let
     configuration = { pkgs, ... }: {
       system.configurationRevision = self.rev or self.dirtyRev or null;
-      nixpkgs.hostPlatform = "aarch64-darwin";
     };
   in
   {
     darwinConfigurations."Nisals-MacBook-Pro-2" = nix-darwin.lib.darwinSystem {
+      nixpkgs.hostPlatform = "aarch64-darwin";
       # Set Git commit hash for darwin-version.
       modules = [ 
         configuration
         ./configuration.nix 
+        ./darwin/hosts/Nisals-MacBook-Pro-2.nix
           home-manager.darwinModules.home-manager 
           {
             home-manager.useGlobalPkgs = true;
@@ -33,6 +34,7 @@
             home-manager.users.nisaldon = import ./home.nix;
           }
       ];
+      extraArgs = { inherit nixpkgs; };
     };
 
     # Expose the package set, including overlays, for convenience.
