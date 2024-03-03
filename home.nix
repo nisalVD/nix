@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     fd
     starship
+    fzf
   ];
 
   programs.zsh = {
