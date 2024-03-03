@@ -3,9 +3,10 @@
 
   home.packages = with pkgs; [
     fd
-    starship
     fzf
+    tmux
   ];
+
 
   programs.zsh = {
     enable = true;
@@ -23,5 +24,9 @@
   programs.starship = {
     enable = true;
   };
+
+  imports = [
+    ./programs/tmux.nix
+  ];
 
 }
