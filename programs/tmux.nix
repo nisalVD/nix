@@ -20,23 +20,50 @@ in
     terminal = "tmux-256color";
     keyMode = "vi";
     plugins = with pkgs; [
-      tmuxPlugins.sensible
-      {
-        plugin = (pkgs.tmuxPlugins.catppuccin.overrideAttrs ( _: {
-            src = pkgs.fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "tmux";
-            rev = "a0119d25283ba2b18287447c1f86720a255fb652";
-            sha256 = "sha256-SGJjDrTrNNxnurYV1o1KbHRIHFyfmbXDX/t4KN8VCao=";
-          };
-        }));
-        extraConfig = ''
-          set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
-          set -g @catppuccin_status_modules_right "session"
-        '';
-      }
+      # tmuxPlugins.sensible
+      tmux-tokyo-night
+      # {
+        # plugin = (pkgs.tmuxPlugins.catppuccin.overrideAttrs ( _: {
+        #     src = pkgs.fetchFromGitHub {
+        #     owner = "catppuccin";
+        #     repo = "tmux";
+        #     rev = "a0119d25283ba2b18287447c1f86720a255fb652";
+        #     sha256 = "sha256-SGJjDrTrNNxnurYV1o1KbHRIHFyfmbXDX/t4KN8VCao=";
+        #   };
+        # }));
+        # extraConfig = ''
+        #   set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
+        #   set -g @catppuccin_status_modules_right "session"
+        #   set -g @catppuccin_window_default_text "" # use "#W" for application instead of directory
+        # '';
+      # }
     ];
     extraConfig = ''
+# Address vim mode switching delay (http://superuser.com/a/252717/65504)
+      set -s escape-time 0
+
+# Increase scrollback buffer size from 2000 to 50000 lines
+      set -g history-limit 50000
+
+# Increase tmux messages display duration from 750ms to 4s
+      set -g display-time 4000
+
+# Refresh 'status-left' and 'status-right' more often, from every 15s to 5s
+      set -g status-interval 5
+
+# Emacs key bindings in tmux command prompt (prefix + :) are better than
+# vi keys, even for vim users
+      set -g status-keys emacs
+
+# Focus events enabled for terminals that support them
+      set -g focus-events on
+
+# Super useful when using "grouped sessions" and multi-monitor setup
+      setw -g aggressive-resize on
+
+bind-key -r p run-shell "tmux neww ~/.local/scripts/tmux-session.sh"
+bind C-j display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+
 # split window and fix path for tmux 1.9
     bind = split-window -h -c "#{pane_current_path}"
     bind - split-window -v -c "#{pane_current_path}"
