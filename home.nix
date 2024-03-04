@@ -9,7 +9,6 @@
     ./programs/tmux.nix 
   ];
 
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
