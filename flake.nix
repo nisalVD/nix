@@ -14,6 +14,15 @@
     configuration = { pkgs, ... }: {
       system.configurationRevision = self.rev or self.dirtyRev or null;
     };
+
+  hosts = {
+    "Nisals-MacBook-Pro-2" = {
+      userSettings = {
+        tmuxProjectPath = "/Users/nisaldon/code/convert";
+      };
+    };
+  };
+
   in
   {
     darwinConfigurations."Nisals-MacBook-Pro-2" = nix-darwin.lib.darwinSystem {
@@ -21,10 +30,20 @@
       modules = [ 
         configuration
         ./configuration.nix 
-        ./darwin/hosts/Nisals-MacBook-Pro-2.nix
         home-manager.darwinModules.home-manager 
-        ./darwin/home-manager.nix
+        ./darwin/hosts/Nisals-MacBook-Pro-2/home.nix
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.nisaldon = import ./home.nix;
+          home-manager.extraSpecialArgs = {
+            userSettings = hosts."Nisals-MacBook-Pro-2".userSettings; 
+          };
+        }
       ];
+      specialArgs = { 
+        userSettings = hosts."Nisals-MacBook-Pro-2".userSettings; 
+      };
     };
 
     # Expose the package set, including overlays, for convenience.

@@ -1,9 +1,12 @@
-{ pkgs, ... }: {
-  home.stateVersion = "24.05";
+{ pkgs, userSettings, ... }: {
 
+
+  home.stateVersion = "24.05";
   home.packages = with pkgs; [
     fd
-    fzf
+  ];
+  imports = [
+    ./programs/tmux.nix 
   ];
 
 
@@ -24,8 +27,5 @@
     enable = true;
   };
 
-  imports = [
-    ./programs/tmux.nix
-  ];
 
 }

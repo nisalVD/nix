@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ config, pkgs, userSettings, ... }: 
 let 
   tmux-tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin
     {
@@ -14,6 +14,11 @@ let
     };
 in
 {
+  home.packages = [
+    pkgs.fzf
+    (import ../scripts/tmux-fzf.nix {inherit pkgs userSettings;})
+  ];
+
   programs.tmux = {
     enable = true;
     shortcut = "a";
@@ -61,7 +66,7 @@ in
 # Super useful when using "grouped sessions" and multi-monitor setup
       setw -g aggressive-resize on
 
-bind-key -r p run-shell "tmux neww ~/.local/scripts/tmux-session.sh"
+bind-key -r p run-shell "tmux neww tmux-fzf-projects"
 bind C-j display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
 
 # split window and fix path for tmux 1.9
