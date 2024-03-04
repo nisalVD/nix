@@ -14,6 +14,13 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
+    shellAliases = {
+      "tls" = "tmux list-sessions";
+      "tks" = "tmux kill-server";
+      "v" = "nvim";
+      "vi" = "nvim";
+      "vim" = "nvim";
+    };
     zplug = {
       enable = true;
       plugins = [
