@@ -31,6 +31,7 @@
         configuration
         ./configuration.nix 
         home-manager.darwinModules.home-manager 
+        ./darwin/base.nix
         ./darwin/hosts/Nisals-MacBook-Pro-2/home.nix
         {
           home-manager.useGlobalPkgs = true;

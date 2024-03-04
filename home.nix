@@ -4,6 +4,7 @@
   home.stateVersion = "24.05";
   home.packages = with pkgs; [
     fd
+    zoxide
   ];
   imports = [
     ./programs/tmux.nix 
@@ -27,6 +28,9 @@
         { name = "Aloxaf/fzf-tab"; } # Simple plugin installation
       ];
     };
+    initExtra = ''
+      eval "$(zoxide init zsh)"
+    '';
   };
 
   programs.starship = {
