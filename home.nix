@@ -10,6 +10,11 @@
     ./programs/tmux.nix 
   ];
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
