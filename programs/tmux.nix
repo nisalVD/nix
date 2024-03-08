@@ -25,7 +25,6 @@ in
     terminal = "tmux-256color";
     keyMode = "vi";
     plugins = with pkgs; [
-      # tmuxPlugins.sensible
       tmux-tokyo-night
       # {
         # plugin = (pkgs.tmuxPlugins.catppuccin.overrideAttrs ( _: {
