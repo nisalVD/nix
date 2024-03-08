@@ -1,18 +1,26 @@
 { pkgs, userSettings, ... }: {
 
-
   home.stateVersion = "24.05";
   home.packages = with pkgs; [
     fd
-    zoxide
   ];
+
   imports = [
     ./programs/tmux.nix 
+    ./programs/wezterm.nix 
   ];
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    withPython3 = true;
+    vimAlias = true;
+    viAlias = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.zsh = {
@@ -21,26 +29,35 @@
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
+      "ls" = "ls --color=auto";
       "tls" = "tmux list-sessions";
       "tks" = "tmux kill-server";
       "v" = "nvim";
-      "vi" = "nvim";
-      "vim" = "nvim";
     };
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "Aloxaf/fzf-tab"; } # Simple plugin installation
-      ];
-    };
+    plugins = [
+    {
+      name = "fzf-tab";
+      src = pkgs.fetchFromGitHub {
+        owner = "Aloxaf";
+        repo = "fzf-tab";
+        rev = "v1.1";
+        sha256 = "sha256-5vQodWvw9akVvvmpVQH0KjdWmCP7vQz2QOK4Yn24MbA=";
+      };
+    }
+    {
+      name = "prompt-pure";
+      src = pkgs.fetchFromGitHub {
+        owner = "sindresorhus";
+        repo = "pure";
+        rev = "v1.23.0";
+        sha256 = "sha256-BmQO4xqd/3QnpLUitD2obVxL0UulpboT8jGNEh4ri8k=";
+      };
+    }
+    ];
     initExtra = ''
-      eval "$(zoxide init zsh)"
+      autoload -U promptinit; promptinit
+      prompt pure
     '';
   };
-
-  programs.starship = {
-    enable = true;
-  };
-
 
 }
