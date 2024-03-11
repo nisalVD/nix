@@ -3,19 +3,12 @@
   imports = [
     ./programs/tmux.nix 
     ./programs/wezterm.nix 
+    ./programs/neovim.nix 
   ];
   home.stateVersion = "24.05";
   home.packages = with pkgs; [
     fd
   ];
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    withPython3 = true;
-    vimAlias = true;
-    viAlias = true;
-  };
 
   programs.zoxide = {
     enable = true;
