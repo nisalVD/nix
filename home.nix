@@ -4,8 +4,10 @@
     ./programs/tmux.nix 
     ./programs/wezterm.nix 
     ./programs/neovim.nix 
+    # ./darwin/home.nix
   ];
   home.stateVersion = "24.05";
+
   home.packages = with pkgs; [
     fd
   ];

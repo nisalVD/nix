@@ -1,5 +1,9 @@
 { pkgs, lib, config, userName, ... }:
 {
+  home.packages = with pkgs; [
+    ripgrep
+    sqlite
+  ];
   xdg.configFile.nvim.source = ../config/nvim;
   programs.neovim = {
     enable = true;
