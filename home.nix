@@ -17,8 +17,6 @@
     ./programs/wezterm.nix 
   ];
 
-  services.kanata.enable = true;
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
