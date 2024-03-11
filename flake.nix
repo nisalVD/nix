@@ -17,6 +17,7 @@
 
   hosts = {
     "Nisals-MacBook-Pro-2" = {
+      userName = "nisaldon";
       userSettings = {
         tmuxProjectPath = "/Users/nisaldon/code/convert";
       };
@@ -36,7 +37,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.nisaldon = import ./home.nix;
+          home-manager.users.${hosts."Nisals-MacBook-Pro-2".userName} = import ./home.nix;
           home-manager.extraSpecialArgs = {
             userSettings = hosts."Nisals-MacBook-Pro-2".userSettings; 
           };
@@ -44,6 +45,7 @@
       ];
       specialArgs = { 
         userSettings = hosts."Nisals-MacBook-Pro-2".userSettings; 
+        userName = hosts."Nisals-MacBook-Pro-2".userName; 
       };
     };
 

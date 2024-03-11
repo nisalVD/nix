@@ -1,20 +1,12 @@
 { pkgs, userSettings, ... }:
-# let
-#   userVimPlugin = pkgs.vimUtils.buildVimPlugin {
-#     name = "user";
-#     src = ./config/nvim;
-#   };
-# in
 {
-  home.stateVersion = "24.05";
-  home.packages = with pkgs; [
-    fd
-    kanata
-  ];
-
   imports = [
     ./programs/tmux.nix 
     ./programs/wezterm.nix 
+  ];
+  home.stateVersion = "24.05";
+  home.packages = with pkgs; [
+    fd
   ];
 
   programs.neovim = {
