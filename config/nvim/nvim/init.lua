@@ -1,0 +1,7 @@
+require("config.base")
+require("config.autocmd")
+require("config.lazy")
+require("config.gui")
+require("config.windows")
+require("config.keymaps")
+require("config.commands")
