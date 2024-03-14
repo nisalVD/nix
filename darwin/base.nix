@@ -1,13 +1,24 @@
-{  pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../programs/karabiner-elements.nix
   ];
 
-# homebrew = {
-#   enable = true;
-#   casks = [];
-#   onActivation.cleanup = "uninstall";
-# };
+  homebrew = {
+    global = {
+      lockfiles = true;
+    };
+    enable = true;
+    taps = [ "shopify/shopify" ];
+    brews = [
+      "brotli"
+      "sqlite"
+      # "shopify-cli"
+    ];
+    casks = [ ];
+    onActivation = {
+      cleanup = "uninstall";
+    };
+  };
 
   modules = {
     karabiner-elements = {
@@ -24,7 +35,7 @@
     dock = {
       autohide = true;
     };
-# keyboard repeat
+    # keyboard repeat
     NSGlobalDomain = {
       KeyRepeat = 1;
       InitialKeyRepeat = 15;

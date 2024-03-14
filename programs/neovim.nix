@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     ripgrep
-    sqlite
+    rustup
   ];
   xdg.configFile.nvim.source = ../config/nvim;
   programs.neovim = {
